@@ -1,0 +1,12 @@
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\bin\Debug\net8.0\BookStore_API.Data.deps.json
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\bin\Debug\net8.0\BookStore_API.Data.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\bin\Debug\net8.0\BookStore_API.Data.pdb
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.AssemblyInfoInputs.cache
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.AssemblyInfo.cs
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.csproj.CoreCompileInputs.cache
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.sourcelink.json
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\refint\BookStore_API.Data.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\BookStore_API.Data.pdb
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Data\obj\Debug\net8.0\ref\BookStore_API.Data.dll
