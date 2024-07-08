@@ -24,4 +24,8 @@
     <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="6.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore_API.Data\BookStore_API.Data.csproj" />
+  </ItemGroup>
+
 </Project>

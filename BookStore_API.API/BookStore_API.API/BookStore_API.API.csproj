@@ -27,12 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BookStore_API.Business\BookStore_API.Business.csproj" />
     <ProjectReference Include="..\BookStore_API.Infrastructure\BookStore_API.Infrastructure.csproj" />
+    <ProjectReference Include="..\BookStore_API.Models\BookStore_API.Models.csproj" />
   </ItemGroup>
 
 </Project>

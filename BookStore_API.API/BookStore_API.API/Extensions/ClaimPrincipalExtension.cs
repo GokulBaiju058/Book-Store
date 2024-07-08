@@ -12,7 +12,7 @@ namespace BookStore_API.API.Extensions
         /// </summary>
         public static long GetUserId(this ClaimsPrincipal user)
         {
-            if (long.TryParse(user.Claims?.FirstOrDefault(c => c.Type == "userid")?.Value, out long id))
+            if (long.TryParse(user.Claims?.FirstOrDefault(c => c.Type == "userId")?.Value, out long id))
             {
                 return id;
             }

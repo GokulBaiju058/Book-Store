@@ -10,9 +10,11 @@
         "dependencies": {
           "BookStore_API.Business": "1.0.0",
           "BookStore_API.Infrastructure": "1.0.0",
+          "BookStore_API.Models": "1.0.0",
           "Mapster": "7.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore.Design": "8.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Newtonsoft.Json": "13.0.3",
@@ -1117,6 +1119,7 @@
       "BookStore_API.Business/1.0.0": {
         "dependencies": {
           "BookStore_API.Data": "1.0.0",
+          "BookStore_API.Infrastructure": "1.0.0",
           "BookStore_API.Models": "1.0.0",
           "BookStore_API.Repositories": "1.0.0",
           "FluentValidation": "11.9.2",
@@ -1163,6 +1166,7 @@
       },
       "BookStore_API.Models/1.0.0": {
         "dependencies": {
+          "BookStore_API.Data": "1.0.0",
           "Mapster": "7.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",

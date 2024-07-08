@@ -9,12 +9,14 @@
       "BookStore_API.Business/1.0.0": {
         "dependencies": {
           "BookStore_API.Data": "1.0.0",
+          "BookStore_API.Infrastructure": "1.0.0",
           "BookStore_API.Models": "1.0.0",
           "BookStore_API.Repositories": "1.0.0",
           "FluentValidation": "11.9.2",
           "Mapster": "7.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore.Design": "8.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Serilog.AspNetCore": "8.0.1",
@@ -1074,8 +1076,23 @@
           "BookStore_API.Data.dll": {}
         }
       },
+      "BookStore_API.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Mapster": "7.4.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
+          "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",
+          "Serilog.AspNetCore": "8.0.1",
+          "Serilog.Settings.Configuration": "8.0.1",
+          "Serilog.Sinks.MSSqlServer": "6.6.1"
+        },
+        "runtime": {
+          "BookStore_API.Infrastructure.dll": {}
+        }
+      },
       "BookStore_API.Models/1.0.0": {
         "dependencies": {
+          "BookStore_API.Data": "1.0.0",
           "Mapster": "7.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",
@@ -1757,6 +1774,11 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "BookStore_API.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BookStore_API.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

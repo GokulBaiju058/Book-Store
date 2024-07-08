@@ -1831,10 +1831,30 @@
           "bin/placeholder/BookStore_API.Data.dll": {}
         }
       },
+      "BookStore_API.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Mapster": "7.4.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
+          "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",
+          "Serilog.AspNetCore": "8.0.1",
+          "Serilog.Settings.Configuration": "8.0.1",
+          "Serilog.Sinks.MSSqlServer": "6.6.1"
+        },
+        "compile": {
+          "bin/placeholder/BookStore_API.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookStore_API.Infrastructure.dll": {}
+        }
+      },
       "BookStore_API.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "BookStore_API.Data": "1.0.0",
           "Mapster": "7.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",
@@ -4717,6 +4737,11 @@
       "path": "../BookStore_API.Data/BookStore_API.Data.csproj",
       "msbuildProject": "../BookStore_API.Data/BookStore_API.Data.csproj"
     },
+    "BookStore_API.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../BookStore_API.Infrastructure/BookStore_API.Infrastructure.csproj",
+      "msbuildProject": "../BookStore_API.Infrastructure/BookStore_API.Infrastructure.csproj"
+    },
     "BookStore_API.Models/1.0.0": {
       "type": "project",
       "path": "../BookStore_API.Models/BookStore_API.Models.csproj",
@@ -4731,12 +4756,14 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BookStore_API.Data >= 1.0.0",
+      "BookStore_API.Infrastructure >= 1.0.0",
       "BookStore_API.Models >= 1.0.0",
       "BookStore_API.Repositories >= 1.0.0",
       "FluentValidation >= 11.9.2",
       "Mapster >= 7.4.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.6",
       "Microsoft.EntityFrameworkCore >= 8.0.6",
+      "Microsoft.EntityFrameworkCore.Design >= 8.0.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.6",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.6",
       "Serilog.AspNetCore >= 8.0.1",
@@ -4776,6 +4803,9 @@
             "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {
               "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj"
             },
+            "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj"
+            },
             "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj": {
               "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj"
             },
@@ -4813,6 +4843,12 @@
             "version": "[8.0.6, )"
           },
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[8.0.6, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[8.0.6, )"
           },

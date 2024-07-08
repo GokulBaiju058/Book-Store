@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookStore_API.Data\BookStore_API.Data.csproj" />
+    <ProjectReference Include="..\BookStore_API.Infrastructure\BookStore_API.Infrastructure.csproj" />
     <ProjectReference Include="..\BookStore_API.Models\BookStore_API.Models.csproj" />
     <ProjectReference Include="..\BookStore_API.Repositories\BookStore_API.Repositories.csproj" />
   </ItemGroup>

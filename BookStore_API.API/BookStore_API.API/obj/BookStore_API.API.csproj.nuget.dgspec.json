@@ -34,6 +34,9 @@
               },
               "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj"
+              },
+              "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj": {
+                "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj"
               }
             }
           }
@@ -62,6 +65,12 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
             },
@@ -147,6 +156,9 @@
               "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {
                 "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj"
               },
+              "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Infrastructure\\BookStore_API.Infrastructure.csproj"
+              },
               "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj": {
                 "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Models\\BookStore_API.Models.csproj"
               },
@@ -184,6 +196,12 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
             },
@@ -288,6 +306,12 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.6, )"
@@ -385,6 +409,12 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.6, )"
@@ -452,7 +482,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {
+                "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -479,6 +513,12 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
             },
@@ -583,6 +623,12 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
             },

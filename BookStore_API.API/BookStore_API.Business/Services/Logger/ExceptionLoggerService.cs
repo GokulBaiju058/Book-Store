@@ -11,7 +11,7 @@ namespace BookStore_API.Business.Services.Logger
     /// <summary>
     /// Service for logging API Exceptions.
     /// </summary>
-    internal class ExceptionLoggerService : IExceptionLoggerService
+    public class ExceptionLoggerService : IExceptionLoggerService
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -19,6 +19,7 @@ namespace BookStore_API.Business.Services.Logger
         {
             _serviceProvider = serviceProvider;
         }
+
 
         /// <summary>
         ///Gets Expceptions asynchronously.
