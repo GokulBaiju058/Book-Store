@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gokul\\source\\repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {}
+    "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gokul\\source\\repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {
+    "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gokul\\source\\repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj",
+        "projectUniqueName": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj",
         "projectName": "BookStore_API.Data",
-        "projectPath": "C:\\Users\\gokul\\source\\repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj",
+        "projectPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\BookStore_API.Data.csproj",
         "packagesPath": "C:\\Users\\gokul\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gokul\\source\\repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\obj\\",
+        "outputPath": "C:\\Users\\gokul\\Source\\Repos\\GokulBaiju058\\Book-Store\\BookStore_API.API\\BookStore_API.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gokul\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,42 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[6.6.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

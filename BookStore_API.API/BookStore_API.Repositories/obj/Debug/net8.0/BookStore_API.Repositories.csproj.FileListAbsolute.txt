@@ -10,3 +10,11 @@ C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore
 C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\refint\BookStore_API.Repositories.dll
 C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\BookStore_API.Repositories.pdb
 C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\ref\BookStore_API.Repositories.dll
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\bin\Debug\net8.0\BookStore_API.Repositories.runtimeconfig.json
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\bin\Debug\net8.0\BookStore_API.Data.dll
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\bin\Debug\net8.0\BookStore_API.Models.dll
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\bin\Debug\net8.0\BookStore_API.Data.pdb
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\bin\Debug\net8.0\BookStore_API.Models.pdb
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\BookStore_API.Repositories.csproj.AssemblyReference.cache
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\BookStor.DE0E40CD.Up2Date
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Repositories\obj\Debug\net8.0\BookStore_API.Repositories.genruntimeconfig.cache
