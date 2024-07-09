@@ -4,13 +4,9 @@ using BookStore_API.Models;
 using BookStore_API.Repositories.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore_API.Business.LoginAggregate
 {
@@ -38,12 +34,12 @@ namespace BookStore_API.Business.LoginAggregate
         /// </summary>
         /// <param name="loginDto">The DTO containing login credentials.</param>
         /// <returns>A response containing the authenticated user's information and JWT token.</returns>
-        public async Task<ResponseMessage<LoggedUser>> AuthenticateUser(LoginDto loginDto)
+        public ResponseMessage<LoggedUser> AuthenticateUser(LoginDto loginDto)
         {
             new ValidatorExtensions.GenericValidation<LoginDto, LoginValidator>().Validate(loginDto);
 
             // Retrieve user from repository including related role information
-            var user = _userRepository.Get(x => x.Username == loginDto.Username, includes: x => x.Role).FirstOrDefault();
+            var user =  _userRepository.Get(x => x.Username == loginDto.Username, includes: x => x.Role).FirstOrDefault();
 
             if (user == null)
             {
@@ -64,14 +60,24 @@ namespace BookStore_API.Business.LoginAggregate
             };
 
             // Generate JWT token
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:JwtBearer:SecurityKey"]));
+            var issuer = _configuration["Authentication:JwtBearer:Issuer"];
+            var audience = _configuration["Authentication:JwtBearer:Audience"];
+            var securityKey = _configuration["Authentication:JwtBearer:SecurityKey"];
+
+            if (issuer == null || audience == null || securityKey == null)
+            {
+                throw new ApplicationException("JWT configuration is missing or invalid.");
+            }
+
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
             var token = new JwtSecurityToken(
-                issuer: _configuration["Authentication:JwtBearer:Issuer"],
-                audience: _configuration["Authentication:JwtBearer:Audience"],
+                issuer: issuer,
+                audience: audience,
                 expires: DateTime.Now.AddHours(18),
                 claims: claims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );
+
 
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var tokenString = jwtSecurityTokenHandler.WriteToken(token);

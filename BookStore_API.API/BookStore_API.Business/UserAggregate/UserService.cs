@@ -5,9 +5,6 @@ using BookStore_API.Models;
 using BookStore_API.Business.Services.PasswordHasher;
 using Mapster;
 using BookStore_API.Repositories.Abstractions;
-using System;
-using System.Threading.Tasks;
-using BookStore_API.Data;
 
 namespace BookStore_API.Business.UserAggregate
 {
@@ -18,20 +15,13 @@ namespace BookStore_API.Business.UserAggregate
     {
         private readonly IUserRepository _userRepository;
 
-        /// <summary>
         /// Initializes a new instance of the <see cref="UserService"/> class.
-        /// </summary>
-        /// <param name="userRepository">The repository for accessing user data.</param>
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        /// <summary>
         /// Registers a new user asynchronously.
-        /// </summary>
-        /// <param name="registerUserDto">The DTO containing user registration information.</param>
-        /// <returns>A response containing the newly registered user DTO.</returns>
         public async Task<ResponseMessage<UserDto>> AddAsync(RegisterUserDto registerUserDto)
         {
             new ValidatorExtensions.GenericValidation<RegisterUserDto, UserValidator>().Validate(registerUserDto);
@@ -42,11 +32,21 @@ namespace BookStore_API.Business.UserAggregate
             // Setting user role as User (assuming RoleId 1 represents 'User' role)
             saveUser.RoleId = 1;
 
-            // Hashing password
-            saveUser.Password = PasswordHasher.Hash(registerUserDto.Password);
+            if (!string.IsNullOrEmpty(registerUserDto.Password))
+            {
+                // Hashing password
+                saveUser.Password = PasswordHasher.Hash(registerUserDto.Password);
+            }
+            else
+            {
+                // Handle the case where the password is null or empty (throw exception, log, or set a default value)
+                throw new Exception("Password cannot be null or empty.");
+            }
 
             // Making user active
             saveUser.isActive = true;
+
+            //TODO implement Email Registration method
 
             // Inserting user into repository
             var newUser = await _userRepository.InsertAsync(saveUser);
@@ -54,48 +54,46 @@ namespace BookStore_API.Business.UserAggregate
             return new ResponseMessage<UserDto>() { Data = newUser.Adapt<UserDto>() };
         }
 
-        /// <summary>
-        /// Deletes a user asynchronously based on the provided ID.
-        /// </summary>
-        /// <param name="id">The ID of the user to delete.</param>
-        /// <returns>A response indicating the success of the deletion operation.</returns>
-        public Task<ResponseMessage<bool>> DeleteAsync(int id)
+        /// Deletes a user asynchronously based on the provided ID
+        public async Task<ResponseMessage<bool>> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            User user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                return new ResponseMessage<bool>() { Data = false, Message = "No User Found With Id -" + id.ToString(), Success = false };
+            }
+            await _userRepository.SoftDeleteAsync(user);
+            return new ResponseMessage<bool>() { Data = true };
         }
 
-        /// <summary>
-        /// Retrieves a paged list of users based on optional parameters.
-        /// </summary>
-        /// <param name="pageNumber">The page number of the results.</param>
-        /// <param name="pageSize">The size of each page.</param>
-        /// <param name="orderBy">The field to order results by.</param>
-        /// <param name="orderDirection">The direction of ordering (ascending or descending).</param>
-        /// <param name="search">A search keyword to filter results.</param>
-        /// <returns>A response containing the paged list of user DTOs.</returns>
-        public ResponseMessage<PagedList<UserDto>> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection, string search)
+        /// Retrieves a user asynchronously based on the provided ID
+        public async Task<ResponseMessage<UserDto>> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            User user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return new ResponseMessage<UserDto>() { Data = null, Message = "No User Found With Id -" + id.ToString(), Success = false };
+            }
+
+            return new ResponseMessage<UserDto>() { Data = user.Adapt<UserDto>() };
         }
 
-        /// <summary>
-        /// Retrieves a user asynchronously based on the provided ID.
-        /// </summary>
-        /// <param name="id">The ID of the user to retrieve.</param>
-        /// <returns>A response containing the user DTO.</returns>
-        public Task<ResponseMessage<UserDto>> GetAsync(int id)
+        public async Task<ResponseMessage<UserDto>> UpdateAsync(RegisterUserDto user)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Updates a user asynchronously.
-        /// </summary>
-        /// <param name="t">The DTO containing updated user information.</param>
-        /// <returns>A response containing the updated user DTO.</returns>
-        public Task<ResponseMessage<UserDto>> UpdateAsync(UserDto t)
-        {
-            throw new NotImplementedException();
+            new ValidatorExtensions.GenericValidation<RegisterUserDto, UserValidator>().Validate(user);
+            if (user == null)
+            {
+                return new ResponseMessage<UserDto>() { Success = false, Message = " Invalid Object" };
+            }
+            var existinguser = await _userRepository.GetByIdAsync(user.Id);
+            if (existinguser == null)
+            {
+                return new ResponseMessage<UserDto>() { Success = false, Message = "User Not Found" };
+            }
+            var updatedUser = await _userRepository.InsertOrUpdateAsync(user.Id, user.Adapt<User>());
+            return new ResponseMessage<UserDto> { Data = updatedUser.Adapt<UserDto>() };
         }
     }
+
 }

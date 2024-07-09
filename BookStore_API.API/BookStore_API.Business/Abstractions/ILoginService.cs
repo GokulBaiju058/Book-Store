@@ -13,6 +13,6 @@ namespace BookStore_API.Business.Abstractions
         /// </summary>
         /// <param name="loginDto">DTO containing user login credentials.</param>
         /// <returns>A response containing information about the authenticated user.</returns>
-        Task<ResponseMessage<LoggedUser>> AuthenticateUser(LoginDto loginDto);
+        ResponseMessage<LoggedUser> AuthenticateUser(LoginDto loginDto);
     }
 }

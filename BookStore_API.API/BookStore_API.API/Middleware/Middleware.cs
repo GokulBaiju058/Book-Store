@@ -1,6 +1,4 @@
-﻿using BookStore_API.API.Extensions;
-using BookStore_API.Business.Abstractions;
-using BookStore_API.Infrastructure.Exceptions;
+﻿using BookStore_API.Infrastructure.Exceptions;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -13,27 +11,34 @@ namespace BookStore_API.API.Middleware
     public class Middleware
     {
         private readonly RequestDelegate _next;
-        private readonly IExceptionLoggerService _exceptionLogger;
         private readonly ILogger<Middleware> _logger;
-        private readonly IAPILoggerService _apiLogger;
         private readonly IConfiguration _configuration;
 
-        public Middleware(RequestDelegate next, IExceptionLoggerService exceptionLogger, ILogger<Middleware> logger, IAPILoggerService apiLogger, IConfiguration configuration)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Middleware"/> class.
+        /// </summary>
+        /// <param name="next">The next middleware in the pipeline.</param>
+        /// <param name="logger">The logger for logging information.</param>
+        /// <param name="configuration">The configuration settings.</param>
+        public Middleware(RequestDelegate next, ILogger<Middleware> logger, IConfiguration configuration)
         {
-            _next = next;
-            _exceptionLogger = exceptionLogger;
-            _logger = logger;
-            _apiLogger = apiLogger;
-            _configuration = configuration;
+            _next = next ?? throw new ArgumentNullException(nameof(next));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         /// <summary>
-        /// Invokes the middleware.
+        /// Invokes the middleware to handle HTTP requests.
         /// </summary>
+        /// <param name="context">The HTTP context.</param>
         public async Task Invoke(HttpContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var path = context.Request.Path.Value;
-            await LogRequest(context);
 
             try
             {
@@ -47,40 +52,19 @@ namespace BookStore_API.API.Middleware
             }
         }
 
-        /// <summary>
-        /// Logs incoming API requests.
-        /// </summary>
-        private async Task LogRequest(HttpContext context)
-        {
-            var path = context.Request.Path.Value;
-            var query = context.Request.QueryString.Value;
-            var method = context.Request.Method;
-            var userAgent = context.Request.Headers.ContainsKey("User-Agent")
-                ? context.Request.Headers["User-Agent"].ToString()
-                : null;
-            var host = context.Request.Headers.ContainsKey("Host")
-                ? context.Request.Headers["Host"].ToString()
-                : null;
-
-            string headers = string.Empty;
-
-            if (context.Request.Headers != null)
-            {
-                if (context.Request.Headers.Count > 0)
-                    headers = JsonConvert.SerializeObject(context.Request.Headers);
-            }
-
-            long? userId = context.User != null ? context.User.GetUserId() : null;
-
-            await _apiLogger.Log(path, query, method, userAgent, host, userId, headers);
-
-        }
 
         /// <summary>
         /// Handles exceptions and returns JSON response.
         /// </summary>
+        /// <param name="context">The HTTP context.</param>
+        /// <param name="error">The exception that occurred.</param>
         private async Task HandleExceptionAsync(HttpContext context, Exception error)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var response = context.Response;
             response.ContentType = "application/json";
             string result = "";
@@ -121,7 +105,6 @@ namespace BookStore_API.API.Middleware
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     errorObject.status = (int)HttpStatusCode.InternalServerError;
                     result = JsonConvert.SerializeObject(errorObject);
-                    await WriteExceptionLog(context, error);
                     break;
             }
 
@@ -129,49 +112,37 @@ namespace BookStore_API.API.Middleware
         }
 
         /// <summary>
-        /// Writes exception details to the exception logger.
-        /// </summary>
-        private async Task WriteExceptionLog(HttpContext context, Exception e)
-        {
-            var path = context.Request.Path.Value;
-            var query = context.Request.QueryString.Value;
-            var userAgent = context.Request.Headers.ContainsKey("User-Agent")
-                ? context.Request.Headers["User-Agent"].ToString()
-                : null;
-            string? body = null;
-
-            if (context.Request.Method == "POST" || context.Request.Method == "PUT" || context.Request.Method == "PATCH")
-            {
-                var requestBody = context.Request.Body;
-                if (requestBody.CanSeek)
-                {
-                    requestBody.Seek(0L, SeekOrigin.Begin);
-
-                    var streamReader = new StreamReader(requestBody);
-                    body = await streamReader.ReadToEndAsync();
-                }
-            }
-
-            await _exceptionLogger.Log(e, path, query, body, userAgent);
-        }
-
-        /// <summary>
-        /// The structure of an error response object.
+        /// Represents the structure of an error response object.
         /// </summary>
         public class ErrorObject
         {
+            /// <summary>
+            /// Gets or sets the HTTP status code.
+            /// </summary>
             [JsonProperty(Order = 1)]
             public int status { get; set; }
+
+            /// <summary>
+            /// Gets or sets the request path where the error occurred.
+            /// </summary>
             [JsonProperty(Order = 2)]
             public string? path { get; set; }
+
+            /// <summary>
+            /// Gets or sets the error message.
+            /// </summary>
             [JsonProperty(Order = 3)]
             public string? message { get; set; }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ErrorObject"/> class.
+            /// </summary>
             public ErrorObject() { }
 
             /// <summary>
-            /// The structure of a validation error response object.
+            /// Initializes a new instance of the <see cref="ErrorObject"/> class with specified values.
             /// </summary>
+            /// <param name="error">The error object containing status, path, and message.</param>
             protected ErrorObject(ErrorObject error)
             {
                 path = error.path;
@@ -180,14 +151,22 @@ namespace BookStore_API.API.Middleware
             }
         }
 
+        /// <summary>
+        /// Represents the structure of a validation error response object.
+        /// </summary>
         public class ValidationErrorObject : ErrorObject
         {
+            /// <summary>
+            /// Gets or sets the validation details.
+            /// </summary>
             [JsonProperty(Order = 4)]
             public dynamic? validation { get; set; }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ValidationErrorObject"/> class.
+            /// </summary>
+            /// <param name="errorObject">The error object containing status, path, and message.</param>
             public ValidationErrorObject(ErrorObject errorObject) : base(errorObject) { }
-
-
         }
     }
 }

@@ -8,7 +8,7 @@ namespace BookStore_API.Data.Entity
         [Key]
         public int Id { get; set; }
 
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         public string? FirstName { get; set; }
 
@@ -29,6 +29,6 @@ namespace BookStore_API.Data.Entity
         [ForeignKey(nameof(Role))]
         public int RoleId { get; set; }
 
-        public virtual Role Role { get; set; }
+        public virtual Role Role { get; set; } = null!;
     }
 }

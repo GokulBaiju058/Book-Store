@@ -1,8 +1,8 @@
 using BookStore_API.API.Middleware;
 using BookStore_API.Business.Abstractions;
+using BookStore_API.Business.BookAggregate;
 using BookStore_API.Business.LoginAggregate;
 using BookStore_API.Business.Mapper;
-using BookStore_API.Business.Services.Logger;
 using BookStore_API.Business.UserAggregate;
 using BookStore_API.Data;
 using BookStore_API.Repositories;
@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,13 +32,14 @@ builder.Services.AddSingleton<IMapper>(new Mapper(typeAdapterConfig));
 builder.Services.AddDbContext<BookStore_APIContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreDev")));
 
-// Configure Services
-builder.Services.AddSingleton<IExceptionLoggerService, ExceptionLoggerService>();
-builder.Services.AddSingleton<IAPILoggerService, APILoggerService>();
+// Configure 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBorrowedBookRepository, BorrowedBookRepository>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
@@ -54,11 +56,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = true,
         ValidAudience = builder.Configuration["Authentication:JwtBearer:Audience"],
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:JwtBearer:SecurityKey"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:JwtBearer:SecurityKey"] ?? throw new InvalidOperationException("JwtBearer:SecurityKey must be configured.")))
     };
 });
 builder.Services.AddSwaggerGen(option =>
 {
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStoreAPI", Version = "v1.09072024" });
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    option.IncludeXmlComments(xmlPath);
 
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -71,19 +79,19 @@ builder.Services.AddSwaggerGen(option =>
     });
 
     option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
         {
+            new OpenApiSecurityScheme
             {
-                new OpenApiSecurityScheme
+                Reference = new OpenApiReference
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type=ReferenceType.SecurityScheme,
-                        Id="Bearer"
-                    }
-                },
-                new string[]{}
-            }
-        });
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
 var app = builder.Build();

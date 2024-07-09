@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore_API.Data.Entity
@@ -20,8 +19,10 @@ namespace BookStore_API.Data.Entity
 
         public DateTime? ReturnedDate { get; set; }
 
-        public virtual User User { get; set; }
+        public string? Remarks { get; set; }
 
-        public virtual Book Book { get; set; }
+        public virtual User User { get; set; } = null!; // Ensure User is initialized as non-nullable
+
+        public virtual Book Book { get; set; } = null!;
     }
 }

@@ -11,8 +11,6 @@ namespace BookStore_API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BorrowedBook> BorrowedBooks { get; set; }
-        public DbSet<ExceptionLog> ExceptionLogs { get; set; } 
-        public DbSet<APILog> APILogs { get; set; }
 
         public BookStore_APIContext(DbContextOptions<BookStore_APIContext> options) : base(options)
         {
@@ -50,6 +48,37 @@ namespace BookStore_API.Data
                     Name = "LibraryAdmin"
                 }
                 );
+
+            modelBuilder.Entity<Book>().HasData(
+                new Book
+                {
+                    Id = 1,
+                    BookName = "To Kill a Mockingbird",
+                    Author = "Harper Lee",
+                    Genre ="Drama",
+                    CurrentQty = 1,
+                    TotalQty = 1,
+                },
+                new Book
+                {
+                    Id = 2,
+                    BookName = "1984",
+                    Author = "George Orwell",
+                    Genre = "Drama",
+                    CurrentQty = 1,
+                    TotalQty = 1,
+                },
+                new Book
+                {
+                    Id = 3,
+                    BookName = "Pride and Prejudice",
+                    Author = "Jane Austen",
+                    Genre = "Drama",
+                    CurrentQty = 1,
+                    TotalQty = 1,
+                }
+                // Add more books as needed
+            );
 
             base.OnModelCreating(modelBuilder);
         }

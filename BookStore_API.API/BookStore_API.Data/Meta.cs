@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BookStore_API.Data
 {
     public class Meta
@@ -16,7 +11,7 @@ namespace BookStore_API.Data
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
 
-        public int[] ItemRange { get; set; }
+        public int[] ItemRange { get; set; } = null!;
 
         public Meta() { }
         public Meta(int currentpage = 0, int pageSize = 0, int totalCount = 0, int totalPages = 0)

@@ -161,3 +161,5 @@ C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore
 C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.API\bin\Debug\net8.0\BookStore_API.Data.pdb
 C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.API\bin\Debug\net8.0\BookStore_API.Models.pdb
 C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.API\bin\Debug\net8.0\BookStore_API.Repositories.pdb
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.API\bin\Debug\net8.0\BookStore_API.API.xml
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.API\obj\Debug\net8.0\BookStore_API.API.xml

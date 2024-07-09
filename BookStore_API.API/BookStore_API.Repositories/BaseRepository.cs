@@ -7,10 +7,7 @@ using System.Linq.Expressions;
 
 namespace BookStore_API.Repositories
 {
-    /// <summary>
-    /// Base repository providing common CRUD operations for entities.
-    /// </summary>
-    /// <typeparam name="TEntity">The type of entity managed by the repository.</typeparam>
+
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly IUnitOfWork _unitOfWork;
@@ -24,9 +21,6 @@ namespace BookStore_API.Repositories
             _logger = logger;
         }
 
-        /// <summary>
-        /// Inserts or updates an entity in the database.
-        /// </summary>
         public async Task<TEntity> InsertOrUpdateAsync(int id, TEntity entity)
         {
 
@@ -49,9 +43,6 @@ namespace BookStore_API.Repositories
             return entity;
         }
 
-        /// <summary>
-        /// Inserts an entity into the database.
-        /// </summary>
         public async Task<TEntity> InsertAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - InsertAsync - Entering - User Id - " + GetUserId().ToString());
@@ -61,9 +52,6 @@ namespace BookStore_API.Repositories
             return entity;
         }
 
-        /// <summary>
-        /// Updates an entity in the database.
-        /// </summary>
         public async Task UpdateAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - UpdateAsync - Entering -  User Id - " + GetUserId().ToString());
@@ -72,25 +60,19 @@ namespace BookStore_API.Repositories
             await _unitOfWork.CommitAsync();
         }
 
-        /// <summary>
-        /// Soft deletes an entity in the database.
-        /// </summary>
         public async Task SoftDeleteAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - SoftDeleteAsync - Entering -  User Id - " + GetUserId().ToString());
+
+            var isActiveProperty = entity.GetType().GetProperty("IsActive");
+            isActiveProperty?.SetValue(entity, false, null);
 
             _unitOfWork._context.Set<TEntity>().Update(entity);
             await _unitOfWork.CommitAsync();
         }
 
-        /// <summary>
-        /// Retrieves all entities from the database.
-        /// </summary>
         public IQueryable<TEntity> GetAll() => _unitOfWork._context.Set<TEntity>().AsQueryable();
 
-        /// <summary>
-        /// Retrieves all entities asynchronously from the database.
-        /// </summary>
         public async Task<IList<TEntity>> GetAllAsync()
         {
             return await _unitOfWork._context.Set<TEntity>().ToListAsync();
@@ -213,8 +195,12 @@ namespace BookStore_API.Repositories
 
         private long GetUserId()
         {
-            long.TryParse(_httpContextAccessor.HttpContext.User.Claims?.FirstOrDefault(c => c.Type == "userId")?.Value, out long userId);
-            return userId;
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "userId");
+            if (userIdClaim != null && long.TryParse(userIdClaim.Value, out long userId))
+            {
+                return userId;
+            }
+            return 0; // Or any other appropriate default value
         }
     }
 }

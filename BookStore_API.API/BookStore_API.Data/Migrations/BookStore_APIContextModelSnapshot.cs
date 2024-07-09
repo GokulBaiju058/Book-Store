@@ -22,40 +22,6 @@ namespace BookStore_API.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookStore_API.Data.Entity.APILog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Headers")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Host")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Method")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QueryString")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserAgent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("APILogs");
-                });
-
             modelBuilder.Entity("BookStore_API.Data.Entity.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -70,8 +36,14 @@ namespace BookStore_API.Data.Migrations
                     b.Property<string>("BookName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CurrentQty")
+                        .HasColumnType("int");
+
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TotalQty")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("isActive")
                         .HasColumnType("bit");
@@ -79,6 +51,35 @@ namespace BookStore_API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "Harper Lee",
+                            BookName = "To Kill a Mockingbird",
+                            CurrentQty = 1,
+                            Genre = "Drama",
+                            TotalQty = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Author = "George Orwell",
+                            BookName = "1984",
+                            CurrentQty = 1,
+                            Genre = "Drama",
+                            TotalQty = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "Jane Austen",
+                            BookName = "Pride and Prejudice",
+                            CurrentQty = 1,
+                            Genre = "Drama",
+                            TotalQty = 1
+                        });
                 });
 
             modelBuilder.Entity("BookStore_API.Data.Entity.BorrowedBook", b =>
@@ -95,6 +96,9 @@ namespace BookStore_API.Data.Migrations
                     b.Property<DateTime>("BorrowedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ReturnedDate")
                         .HasColumnType("datetime2");
 
@@ -108,46 +112,6 @@ namespace BookStore_API.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("BorrowedBooks");
-                });
-
-            modelBuilder.Entity("BookStore_API.Data.Entity.ExceptionLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QueryString")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Source")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StackTrace")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TargetSite")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserAgent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExceptionLogs");
                 });
 
             modelBuilder.Entity("BookStore_API.Data.Entity.Role", b =>

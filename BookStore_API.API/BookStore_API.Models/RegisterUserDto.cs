@@ -6,7 +6,7 @@ namespace BookStore_API.Models
     /// </summary>
     public class RegisterUserDto
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string? Username { get; set; }
 
@@ -20,7 +20,7 @@ namespace BookStore_API.Models
 
         public string? Address { get; set; }
 
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         public string? ZipCode { get; set; }
 

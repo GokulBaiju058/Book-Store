@@ -1,14 +1,16 @@
 ﻿
-using BookStore_API.Data.Entity;
+using BookStore_API.Data;
 using BookStore_API.Models;
 
 namespace BookStore_API.Business.Abstractions
 {
     /// <summary>
-    /// Interface for user-related operations.
-    /// Inherits from the base service interface with User entity, RegisterUserDto for addition, and User entity for view.
+    /// Interface for user-related operations
     /// </summary>
-    public interface IUserService : IBaseService<UserDto,RegisterUserDto,UserDto>
+    public interface IUserService
     {
+        Task<ResponseMessage<UserDto>> GetAsync(int id);
+        Task<ResponseMessage<UserDto>> AddAsync(RegisterUserDto user);
+        Task<ResponseMessage<UserDto>> UpdateAsync(RegisterUserDto user);
     }
 }

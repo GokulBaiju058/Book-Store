@@ -10,9 +10,9 @@ namespace BookStore_API.API.Extensions
         /// <summary>
         /// Retrieves the user ID from claims if available.
         /// </summary>
-        public static long GetUserId(this ClaimsPrincipal user)
+        public static int GetUserId(this ClaimsPrincipal user)
         {
-            if (long.TryParse(user.Claims?.FirstOrDefault(c => c.Type == "userId")?.Value, out long id))
+            if (int.TryParse(user.Claims?.FirstOrDefault(c => c.Type == "userId")?.Value, out int id))
             {
                 return id;
             }

@@ -14,25 +14,6 @@ namespace BookStore_API.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "APILogs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QueryString = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Method = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserAgent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Host = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
-                    Headers = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_APILogs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -41,32 +22,13 @@ namespace BookStore_API.Data.Migrations
                     BookName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isActive = table.Column<bool>(type: "bit", nullable: true)
+                    isActive = table.Column<bool>(type: "bit", nullable: true),
+                    CurrentQty = table.Column<int>(type: "int", nullable: true),
+                    TotalQty = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExceptionLogs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Source = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TargetSite = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StackTrace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QueryString = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserAgent = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExceptionLogs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,7 +81,8 @@ namespace BookStore_API.Data.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     BorrowedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ReturnedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,6 +99,16 @@ namespace BookStore_API.Data.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Author", "BookName", "CurrentQty", "Genre", "TotalQty", "isActive" },
+                values: new object[,]
+                {
+                    { 1, "Harper Lee", "To Kill a Mockingbird", 1, "Drama", 1, null },
+                    { 2, "George Orwell", "1984", 1, "Drama", 1, null },
+                    { 3, "Jane Austen", "Pride and Prejudice", 1, "Drama", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -167,13 +140,7 @@ namespace BookStore_API.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "APILogs");
-
-            migrationBuilder.DropTable(
                 name: "BorrowedBooks");
-
-            migrationBuilder.DropTable(
-                name: "ExceptionLogs");
 
             migrationBuilder.DropTable(
                 name: "Books");
