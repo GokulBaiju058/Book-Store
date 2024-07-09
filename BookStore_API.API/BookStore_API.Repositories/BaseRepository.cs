@@ -64,7 +64,7 @@ namespace BookStore_API.Repositories
         {
             _logger.LogInformation("BaseRepository - SoftDeleteAsync - Entering -  User Id - " + GetUserId().ToString());
 
-            var isActiveProperty = entity.GetType().GetProperty("IsActive");
+            var isActiveProperty = entity.GetType().GetProperty("isActive");
             isActiveProperty?.SetValue(entity, false, null);
 
             _unitOfWork._context.Set<TEntity>().Update(entity);

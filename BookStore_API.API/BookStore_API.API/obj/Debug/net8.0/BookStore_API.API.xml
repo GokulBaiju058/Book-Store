@@ -72,7 +72,7 @@
             </summary>
             <param name="bookId">The Id of the book.</param>
         </member>
-        <member name="M:BookStore_API.API.Controllers.BookController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Boolean,System.String)">
+        <member name="M:BookStore_API.API.Controllers.BookController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,System.Boolean,System.String)">
             <summary>
             Retrieves a paged list of all books.
             </summary>
@@ -81,6 +81,7 @@
             <param name="orderBy">Field to order by.</param>
             <param name="orderDirection">Order direction (ascending or descending).</param>
             <param name="search">Search criteria.</param>
+            <param name="isActive">Filter By isActive.</param>
         </member>
         <member name="M:BookStore_API.API.Controllers.BookController.BorrowBook(System.Int32)">
             <summary>
@@ -134,7 +135,7 @@
             <param name="userService">Service interface providing methods for user management.</param>
             <param name="bookService">Service interface providing methods for book-related operations.</param>
         </member>
-        <member name="M:BookStore_API.API.Controllers.UserController.GetById(System.Int32)">
+        <member name="M:BookStore_API.API.Controllers.UserController.GetById">
             <summary>
             Endpoint for retrieving user details by user ID.
             </summary>

@@ -38,8 +38,10 @@ namespace BookStore_API.API.Controllers
         /// <returns>Response containing the user's information.</returns>
         [HttpGet]
         [Route("GetUserById")]
-        public async Task<ResponseMessage<UserDto>> GetById(int userId)
+        public async Task<ResponseMessage<UserDto>> GetById()
         {
+            _logger.LogWarning("Getting User Details");
+            int userId = HttpContext.User.GetUserId();
             _logger.LogInformation($"UserController - Get Single User for UserId - {userId}");
             return await _userService.GetAsync(userId); // Delegate user retrieval to service
         }

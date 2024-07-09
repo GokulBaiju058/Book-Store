@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Mapster;
 using IS_Toyo_MicroLearning_API.Business;
 using BookStore_API.Data;
+using System.Linq.Expressions;
 
 namespace BookStore_API.Business.BookAggregate
 {
@@ -49,11 +50,18 @@ namespace BookStore_API.Business.BookAggregate
         /// <summary>
         /// Retrieves a list of books based on optional filtering and paging parameters.
         /// </summary>
-        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection, string search)
+        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive, string orderBy, bool orderDirection, string search)
         {
-            var expression = PredicateBuilder.Or(ExpressionBuilder.GetExpression<Book>("BookName", search), ExpressionBuilder.GetExpression<Book>("Author", search));
-            var books = _bookRepository.GetAll(pageNumber, pageSize, orderBy, orderDirection, expression);
-            return new ResponseMessage<PagedList<BookViewDto>>() { Data = books.Adapt<PagedList<BookViewDto>>() };
+            Expression<Func<Book, bool>> expression = PredicateBuilder.Or(ExpressionBuilder.GetExpression<Book>("BookName", search), ExpressionBuilder.GetExpression<Book>("Author", search));
+            var predicate = PredicateBuilder.True<Book>();
+
+            // Add isActive filter if isActive is not null
+            if (isActive.HasValue)
+            {
+                predicate = predicate.And(p => p.isActive == isActive);
+            }
+            var books = _bookRepository.GetAll(pageNumber, pageSize, orderBy, orderDirection,predicate, expression);
+            return new ResponseMessage<PagedList<BookViewDto>> { Data = books.Adapt<PagedList<BookViewDto>>() };
         }
 
         /// <summary>

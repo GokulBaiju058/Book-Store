@@ -52,12 +52,20 @@ namespace BookStore_API.API.Controllers
         /// <param name="orderBy">Field to order by.</param>
         /// <param name="orderDirection">Order direction (ascending or descending).</param>
         /// <param name="search">Search criteria.</param>
+        /// <param name="isActive">Filter By isActive.</param>
         [HttpGet]
         [Route("GetAllBooks")]
-        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize, string orderBy = "Id", bool orderDirection = true, string search = "")
+        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive = null, string orderBy = "Id", bool orderDirection = true, string search = "")
         {
+            _logger.LogWarning("Getting User Details");
+            var userRole = HttpContext.User.GetRoles();
+            // Check if userRole contains "LibraryAdmin"
+            if (!userRole.Contains("LibraryAdmin"))
+            {
+                isActive = null; // Set isActive to true
+            }
             _logger.LogInformation("BookController - GetAll Books");
-            return _bookService.GetAll(pageNumber, pageSize, orderBy, orderDirection, search);
+            return _bookService.GetAll(pageNumber, pageSize,isActive, orderBy, orderDirection, search);
         }
 
         /// <summary>

@@ -91,7 +91,14 @@ namespace BookStore_API.Business.UserAggregate
             {
                 return new ResponseMessage<UserDto>() { Success = false, Message = "User Not Found" };
             }
-            var updatedUser = await _userRepository.InsertOrUpdateAsync(user.Id, user.Adapt<User>());
+            User updateUser = user.Adapt<User>();
+            //Role Cannot be chnaged
+            updateUser.RoleId = existinguser.RoleId;
+            if (!string.IsNullOrEmpty(user.Password))
+            {
+                updateUser.Password = PasswordHasher.Hash(user.Password);
+            }
+            var updatedUser = await _userRepository.InsertOrUpdateAsync(user.Id, updateUser);
             return new ResponseMessage<UserDto> { Data = updatedUser.Adapt<UserDto>() };
         }
     }

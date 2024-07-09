@@ -9,7 +9,7 @@ namespace BookStore_API.Business.Abstractions
     {
         Task<ResponseMessage<BookViewDto>> GetAsync(int id);
         Task<ResponseMessage<BookDetailViewDto>> GetBookDetail(int id);
-        ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection, string search);
+        ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive, string orderBy, bool orderDirection, string search);
         Task<ResponseMessage<BookDto>> AddAsync(BookDto addBook);
         Task<ResponseMessage<BookDto>> UpdateAsync(BookDto updateBook);
         Task<ResponseMessage<bool>> DeleteAsync(int id);
