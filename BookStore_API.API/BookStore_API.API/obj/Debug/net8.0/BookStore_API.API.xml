@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BookStore_API.API</name>
+    </assembly>
+    <members>
+        <member name="T:BookStore_API.API.Controllers.AdminController">
+            <summary>
+            Controller for managing books by LibraryAdmin role.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.#ctor(BookStore_API.Business.Abstractions.IBookService,Microsoft.Extensions.Logging.ILogger{BookStore_API.API.Controllers.AdminController})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.AddBook(BookStore_API.Models.BookDto)">
+            <summary>
+            Adds a new book.
+            </summary>
+            <param name="book">The book details to add.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.UpdateBook(BookStore_API.Models.BookDto)">
+            <summary>
+            Updates an existing book.
+            </summary>
+            <param name="book">The updated book details.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.DeleteBook(System.Int32)">
+            <summary>
+            Deletes a book by its Id.
+            </summary>
+            <param name="bookId">The Id of the book to delete.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.GetAllBorrowedBookByUser(System.Int32)">
+            <summary>
+            Retrieves all books borrowed by a specific user.
+            </summary>
+            <param name="userId">The Id of the user.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.GetAllBorrowedBooks(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Boolean,System.String)">
+            <summary>
+            Retrieves a paged list of all borrowed books.
+            </summary>
+            <param name="pageNumber">Page number.</param>
+            <param name="pageSize">Number of items per page.</param>
+            <param name="orderBy">Field to order by.</param>
+            <param name="orderDirection">Order direction (ascending or descending).</param>
+            <param name="search">Search criteria.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.GetBookDetail(System.Int32)">
+            <summary>
+            Retrieves detailed information about a specific book.
+            </summary>
+            <param name="bookId">The Id of the book.</param>
+        </member>
+        <member name="T:BookStore_API.API.Controllers.BookController">
+            <summary>
+            Controller for managing book operations.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.BookController.#ctor(Microsoft.Extensions.Logging.ILogger{BookStore_API.API.Controllers.BookController},BookStore_API.Business.Abstractions.IBookService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Controllers.BookController"/> class.
+            </summary>
+            <param name="logger">Logger instance for logging information related to book operations.</param>
+            <param name="bookService">Service interface providing methods for book management.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.BookController.GetbookById(System.Int32)">
+            <summary>
+            Retrieves details of a book by its Id.
+            </summary>
+            <param name="bookId">The Id of the book.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.BookController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,System.Boolean,System.String)">
+            <summary>
+            Retrieves a paged list of all books.
+            </summary>
+            <param name="pageNumber">Page number.</param>
+            <param name="pageSize">Number of items per page.</param>
+            <param name="orderBy">Field to order by.</param>
+            <param name="orderDirection">Order direction (ascending or descending).</param>
+            <param name="search">Search criteria.</param>
+            <param name="isActive">Filter By isActive.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.BookController.BorrowBook(System.Int32)">
+            <summary>
+            Borrows a book for the authenticated user.
+            </summary>
+            <param name="bookId">The Id of the book to borrow.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.BookController.ReturnBook(System.Int32)">
+            <summary>
+            Returns a borrowed book by its borrow Id.
+            </summary>
+            <param name="borrowId">The Id of the borrow record.</param>
+        </member>
+        <member name="T:BookStore_API.API.Controllers.LoginController">
+            <summary>
+            Controller responsible for handling user login and registration operations.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.LoginController.#ctor(Microsoft.Extensions.Logging.ILogger{BookStore_API.API.Controllers.LoginController},BookStore_API.Business.Abstractions.ILoginService,BookStore_API.Business.Abstractions.IUserService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Controllers.LoginController"/> class.
+            </summary>
+            <param name="logger">Logger instance for logging information related to user operations.</param>
+            <param name="loginService">Service interface providing methods for user authentication.</param>
+            <param name="userService">Service interface providing methods for user management.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.LoginController.Login(BookStore_API.Models.LoginDto)">
+            <summary>
+            Endpoint for user authentication.
+            </summary>
+            <param name="loginDto">DTO containing user credentials.</param>
+            <returns>Response containing a logged-in user's information.</returns>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.LoginController.Add(BookStore_API.Models.RegisterUserDto)">
+            <summary>
+            Endpoint for registering a new user.
+            </summary>
+            <param name="registerUserDto">DTO containing user details for registration.</param>
+            <returns>Response containing the newly registered user's information.</returns>
+        </member>
+        <member name="T:BookStore_API.API.Controllers.UserController">
+            <summary>
+            Controller responsible for handling user-specific operations.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.UserController.#ctor(Microsoft.Extensions.Logging.ILogger{BookStore_API.API.Controllers.UserController},BookStore_API.Business.Abstractions.IUserService,BookStore_API.Business.Abstractions.IBookService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Controllers.UserController"/> class.
+            </summary>
+            <param name="logger">Logger instance for logging information related to user operations.</param>
+            <param name="userService">Service interface providing methods for user management.</param>
+            <param name="bookService">Service interface providing methods for book-related operations.</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.UserController.GetById">
+            <summary>
+            Endpoint for retrieving user details by user ID.
+            </summary>
+            <returns>Response containing the user's information.</returns>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.UserController.Update(BookStore_API.Models.RegisterUserDto)">
+            <summary>
+            Endpoint for updating user details.
+            </summary>
+            <param name="userDto">DTO containing updated user information.</param>
+            <returns>Response containing the updated user's information.</returns>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.UserController.GetMyBorrowedBooks">
+            <summary>
+            Endpoint for retrieving books borrowed by the current user.
+            </summary>
+            <returns>Response containing a list of borrowed books by the current user.</returns>
+        </member>
+        <member name="T:BookStore_API.API.Extensions.ClaimsPrincipalExtensions">
+            <summary>
+            Extension methods for ClaimsPrincipal to retrieve user-related information.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Retrieves the user ID from claims if available.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Extensions.ClaimsPrincipalExtensions.GetRoles(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Retrieves the role associated with the user.
+            </summary>
+        </member>
+        <member name="T:BookStore_API.API.Middleware.Middleware">
+            <summary>
+            Middleware for handling exceptions and logging API requests.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{BookStore_API.API.Middleware.Middleware},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Middleware.Middleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="logger">The logger for logging information.</param>
+            <param name="configuration">The configuration settings.</param>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the middleware to handle HTTP requests.
+            </summary>
+            <param name="context">The HTTP context.</param>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            Handles exceptions and returns JSON response.
+            </summary>
+            <param name="context">The HTTP context.</param>
+            <param name="error">The exception that occurred.</param>
+        </member>
+        <member name="T:BookStore_API.API.Middleware.Middleware.ErrorObject">
+            <summary>
+            Represents the structure of an error response object.
+            </summary>
+        </member>
+        <member name="P:BookStore_API.API.Middleware.Middleware.ErrorObject.status">
+            <summary>
+            Gets or sets the HTTP status code.
+            </summary>
+        </member>
+        <member name="P:BookStore_API.API.Middleware.Middleware.ErrorObject.path">
+            <summary>
+            Gets or sets the request path where the error occurred.
+            </summary>
+        </member>
+        <member name="P:BookStore_API.API.Middleware.Middleware.ErrorObject.message">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.ErrorObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Middleware.Middleware.ErrorObject"/> class.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.ErrorObject.#ctor(BookStore_API.API.Middleware.Middleware.ErrorObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Middleware.Middleware.ErrorObject"/> class with specified values.
+            </summary>
+            <param name="error">The error object containing status, path, and message.</param>
+        </member>
+        <member name="T:BookStore_API.API.Middleware.Middleware.ValidationErrorObject">
+            <summary>
+            Represents the structure of a validation error response object.
+            </summary>
+        </member>
+        <member name="P:BookStore_API.API.Middleware.Middleware.ValidationErrorObject.validation">
+            <summary>
+            Gets or sets the validation details.
+            </summary>
+        </member>
+        <member name="M:BookStore_API.API.Middleware.Middleware.ValidationErrorObject.#ctor(BookStore_API.API.Middleware.Middleware.ErrorObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BookStore_API.API.Middleware.Middleware.ValidationErrorObject"/> class.
+            </summary>
+            <param name="errorObject">The error object containing status, path, and message.</param>
+        </member>
+    </members>
+</doc>

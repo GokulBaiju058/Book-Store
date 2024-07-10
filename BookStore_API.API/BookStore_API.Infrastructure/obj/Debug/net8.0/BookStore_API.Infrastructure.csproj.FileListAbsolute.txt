@@ -1,0 +1,15 @@
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\bin\Debug\net8.0\BookStore_API.Infrastructure.deps.json
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\bin\Debug\net8.0\BookStore_API.Infrastructure.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\bin\Debug\net8.0\BookStore_API.Infrastructure.pdb
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.AssemblyInfo.cs
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.sourcelink.json
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\refint\BookStore_API.Infrastructure.dll
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.pdb
+C:\Users\gokul\source\repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\ref\BookStore_API.Infrastructure.dll
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\bin\Debug\net8.0\BookStore_API.Infrastructure.runtimeconfig.json
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\gokul\Source\Repos\GokulBaiju058\Book-Store\BookStore_API.API\BookStore_API.Infrastructure\obj\Debug\net8.0\BookStore_API.Infrastructure.genruntimeconfig.cache
