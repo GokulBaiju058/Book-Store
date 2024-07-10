@@ -139,7 +139,6 @@
             <summary>
             Endpoint for retrieving user details by user ID.
             </summary>
-            <param name="userId">The ID of the user to retrieve.</param>
             <returns>Response containing the user's information.</returns>
         </member>
         <member name="M:BookStore_API.API.Controllers.UserController.Update(BookStore_API.Models.RegisterUserDto)">

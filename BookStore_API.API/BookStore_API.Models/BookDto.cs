@@ -11,7 +11,7 @@ namespace BookStore_API.Models
 
         public string? Genre { get; set; }
 
-        public bool? isActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public int? CurrentQty { get; set; }
 

@@ -44,7 +44,7 @@ namespace BookStore_API.Business.UserAggregate
             }
 
             // Making user active
-            saveUser.isActive = true;
+            saveUser.IsActive = true;
 
             //TODO implement Email Registration method
 

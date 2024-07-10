@@ -13,7 +13,7 @@ namespace BookStore_API.Business.BookAggregate
         public BookValidator()
         {
             RuleFor(x => x.BookName).NotEmpty().WithMessage("The {PropertyName} is required.");
-            RuleFor(x => x.isActive).NotEmpty().WithMessage("The {PropertyName} is required.");
+            RuleFor(x => x.IsActive).NotEmpty().WithMessage("The {PropertyName} is required.");
             RuleFor(x => x.TotalQty).NotEmpty().WithMessage("The {PropertyName} is required.");
             RuleFor(x => x.CurrentQty).NotEmpty().WithMessage("The {PropertyName} is required.");
         }

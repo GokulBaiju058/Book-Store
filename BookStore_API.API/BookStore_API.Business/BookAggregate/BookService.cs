@@ -58,7 +58,7 @@ namespace BookStore_API.Business.BookAggregate
             // Add isActive filter if isActive is not null
             if (isActive.HasValue)
             {
-                predicate = predicate.And(p => p.isActive == isActive);
+                predicate = predicate.And(p => p.IsActive == isActive);
             }
             var books = _bookRepository.GetAll(pageNumber, pageSize, orderBy, orderDirection,predicate, expression);
             return new ResponseMessage<PagedList<BookViewDto>> { Data = books.Adapt<PagedList<BookViewDto>>() };
@@ -130,8 +130,8 @@ namespace BookStore_API.Business.BookAggregate
 
             new ValidatorExtensions.GenericValidation<BorrowBookDto, BorrowBookValidator>().Validate(borrowBookDto);
 
-            // Check if the book exists
-            var book = await _bookRepository.Get(x => x.Id == borrowBookDto.BookId).SingleOrDefaultAsync();
+            // Check if the book exists and Available to borrow
+            var book = await _bookRepository.Get(x => x.Id == borrowBookDto.BookId && x.CurrentQty > 0).SingleOrDefaultAsync();
             if (book == null)
             {
                 return new ResponseMessage<BorrowedBookViewDto>() { Message = "Book Not Found", Success = false };

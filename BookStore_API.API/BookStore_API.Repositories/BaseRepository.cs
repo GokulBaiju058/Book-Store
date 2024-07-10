@@ -10,9 +10,9 @@ namespace BookStore_API.Repositories
 
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        protected readonly IUnitOfWork _unitOfWork;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger<BaseRepository<TEntity>> _logger;
+        protected readonly IUnitOfWork _unitOfWork; // Unit of work instance for database operations
+        private readonly IHttpContextAccessor _httpContextAccessor; // Accessor for HTTP context information
+        private readonly ILogger<BaseRepository<TEntity>> _logger; // Logger for logging operations
 
         public BaseRepository(IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, ILogger<BaseRepository<TEntity>> logger)
         {
@@ -21,6 +21,12 @@ namespace BookStore_API.Repositories
             _logger = logger;
         }
 
+        // Method: InsertOrUpdateAsync
+        // Summary: Inserts or updates an entity asynchronously based on ID.
+        // Parameters:
+        // - id: The ID of the entity to be updated.
+        // - entity: The entity object to be inserted or updated.
+        // Returns: The inserted or updated entity object.
         public async Task<TEntity> InsertOrUpdateAsync(int id, TEntity entity)
         {
 
@@ -43,6 +49,11 @@ namespace BookStore_API.Repositories
             return entity;
         }
 
+        // Method: InsertAsync
+        // Summary: Inserts a new entity asynchronously.
+        // Parameters:
+        // - entity: The entity object to be inserted.
+        // Returns: The inserted entity object.
         public async Task<TEntity> InsertAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - InsertAsync - Entering - User Id - " + GetUserId().ToString());
@@ -52,6 +63,11 @@ namespace BookStore_API.Repositories
             return entity;
         }
 
+        // Method: UpdateAsync
+        // Summary: Updates an existing entity asynchronously.
+        // Parameters:
+        // - entity: The entity object to be updated.
+        // Returns: Task representing the asynchronous operation.
         public async Task UpdateAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - UpdateAsync - Entering -  User Id - " + GetUserId().ToString());
@@ -60,24 +76,42 @@ namespace BookStore_API.Repositories
             await _unitOfWork.CommitAsync();
         }
 
+        // Method: SoftDeleteAsync
+        // Summary: Soft deletes an entity asynchronously by setting IsActive property to false.
+        // Parameters:
+        // - entity: The entity object to be soft deleted.
+        // Returns: Task representing the asynchronous operation.
         public async Task SoftDeleteAsync(TEntity entity)
         {
             _logger.LogInformation("BaseRepository - SoftDeleteAsync - Entering -  User Id - " + GetUserId().ToString());
 
-            var isActiveProperty = entity.GetType().GetProperty("isActive");
+            var isActiveProperty = entity.GetType().GetProperty("IsActive");
             isActiveProperty?.SetValue(entity, false, null);
 
             _unitOfWork._context.Set<TEntity>().Update(entity);
             await _unitOfWork.CommitAsync();
         }
 
+        // Method: GetAll
+        // Summary: Retrieves all entities of type TEntity from the database.
+        // Returns: IQueryable<TEntity> representing all entities.
         public IQueryable<TEntity> GetAll() => _unitOfWork._context.Set<TEntity>().AsQueryable();
 
+        // Method: GetAllAsync
+        // Summary: Retrieves all entities of type TEntity asynchronously from the database.
+        // Returns: Task<IList<TEntity>> representing a list of all entities.
         public async Task<IList<TEntity>> GetAllAsync()
         {
             return await _unitOfWork._context.Set<TEntity>().ToListAsync();
         }
 
+        // Method: Get
+        // Summary: Retrieves entities of type TEntity based on filter conditions, with optional includes and ordering.
+        // Parameters:
+        // - expression: The filter expression to apply on entities.
+        // - orderBy: Optional function for ordering entities.
+        // - includes: Optional array of expressions for including related entities.
+        // Returns: IEnumerable<TEntity> representing the retrieved entities.
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> expression, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, params Expression<Func<TEntity, object>>[] includes)
         {
             var query = GetAll().Where(expression);
@@ -99,16 +133,39 @@ namespace BookStore_API.Repositories
 
         }
 
+        // Method: GetAll
+        // Summary: Retrieves entities of type TEntity with pagination, ordering, and search conditions.
+        // Parameters:
+        // - pageNumber: The page number of entities to retrieve.
+        // - pageSize: The number of entities per page.
+        // - orderBy: The field to order entities by.
+        // - orderDirection: The order direction (ascending or descending).
+        // - searchExpression: Optional filter expression for additional search conditions.
+        // - includes: Optional array of expressions for including related entities.
+        // Returns: PagedList<TEntity> representing paged list of entities.
         public PagedList<TEntity> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection, Expression<Func<TEntity, bool>> searchExpression, params Expression<Func<TEntity, object>>[] includes)
         {
             return GetAll(pageNumber, pageSize, orderBy, orderDirection, searchExpression, null, includes);
         }
 
+        // Method: GetAll
+        // Summary: Retrieves entities of type TEntity with pagination, ordering, and search conditions.
+        // Parameters:
+        // - pageNumber: The page number of entities to retrieve.
+        // - pageSize: The number of entities per page.
+        // - orderBy: The field to order entities by.
+        // - orderDirection: The order direction (ascending or descending).
+        // Returns: PagedList<TEntity> representing paged list of entities.
         public PagedList<TEntity> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection)
         {
             return GetAll(pageNumber, pageSize, orderBy, orderDirection, null, null, null);
         }
 
+        // Method: GetByIdAsync
+        // Summary: Retrieves an entity of type TEntity by its ID asynchronously.
+        // Parameters:
+        // - id: The ID of the entity to retrieve.
+        // Returns: Task<TEntity> representing the retrieved entity.
         public async Task<TEntity> GetByIdAsync(int id)
         {
             TEntity? entity = await _unitOfWork._context.Set<TEntity>().FindAsync(id);
@@ -121,23 +178,24 @@ namespace BookStore_API.Repositories
             return entity;
         }
 
+        // Method: Get
+        // Summary: Retrieves entities of type TEntity based on filter conditions.
+        // Parameters:
+        // - expression: The filter expression to apply on entities.
+        // Returns: IQueryable<TEntity> representing the retrieved entities.
         public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> expression) => GetAll().Where(expression);
 
-        public virtual IQueryable<TEntity> Include<TProperty>(IQueryable<TEntity> query, Expression<Func<TEntity, TProperty>> path) => query.Include(path);
-
-        public async Task DeleteAsync(int id)
-        {
-            TEntity? entity = await _unitOfWork._context.Set<TEntity>().FindAsync(id);
-            if (entity == null)
-            {
-                Type type = typeof(TEntity);
-                throw new KeyNotFoundException("No " + type.Name + " object found with id: " + id.ToString());
-            }
-
-            _unitOfWork._context.Set<TEntity>().Remove(entity);
-            await _unitOfWork.CommitAsync();
-        }
-
+        // Method: GetAll
+        // Summary: Retrieves entities of type TEntity with pagination, ordering, and search conditions.
+        // Parameters:
+        // - pageNumber: The page number of entities to retrieve.
+        // - pageSize: The number of entities per page.
+        // - orderBy: The field to order entities by.
+        // - orderDirection: The order direction (ascending or descending).
+        // - expression: Optional filter expression for additional conditions.
+        // - searchExpression: Optional filter expression for additional search conditions.
+        // - includes: Optional array of expressions for including related entities.
+        // Returns: PagedList<TEntity> representing paged list of entities.
         public PagedList<TEntity> GetAll(int? pageNumber, int? pageSize, string orderBy, bool orderDirection, Expression<Func<TEntity, bool>>? expression, Expression<Func<TEntity, bool>>? searchExpression, params Expression<Func<TEntity, object>>[]? includes)
         {
 
@@ -171,26 +229,8 @@ namespace BookStore_API.Repositories
             if (pageSize == null)
                 pageSize = 10;
 
-            //var currentPageValues = allValues.Skip((pageNumber.Value - 1) * pageSize.Value)
-            //.Take(pageSize.Value).AsQueryable();
-
             return PagedList<TEntity>.ToPagedList(query.AsQueryable(), pageNumber.Value, pageSize.Value, orderBy, orderDirection);
 
-        }
-
-        public async Task<bool> ExistAsync(Expression<Func<TEntity, bool>> expression) => await _unitOfWork._context.Set<TEntity>().AsNoTracking().AnyAsync(expression);
-
-        public async Task<TEntity?> GetOneNoTracking(Expression<Func<TEntity, bool>> expression) => await _unitOfWork._context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(expression);
-
-        public async Task<TEntity?> GetOneTracking(Expression<Func<TEntity, bool>> expression) => await _unitOfWork._context.Set<TEntity>().FirstOrDefaultAsync(expression);
-        public async Task<IReadOnlyList<TEntity>> GetPagedReponseAsync(int pageNumber, int pageSize)
-        {
-            return await _unitOfWork._context
-                .Set<TEntity>()
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .AsNoTracking()
-                .ToListAsync();
         }
 
         private long GetUserId()

@@ -35,7 +35,7 @@ namespace BookStore_API.Repositories
                 BookName = book.BookName,
                 Author = book.Author,
                 Genre = book.Genre,
-                isActive = book.isActive,
+                IsActive = book.IsActive,
                 CurrentQty = book.CurrentQty,
                 TotalQty = book.TotalQty,
                 Borrowers = new List<BorrowerDto>() // Initialize Borrowers list

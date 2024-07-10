@@ -24,7 +24,7 @@ namespace BookStore_API.Data.Entity
 
         public string? ZipCode { get; set; }
 
-        public bool ? isActive { get; set; }
+        public bool ? IsActive { get; set; }
 
         [ForeignKey(nameof(Role))]
         public int RoleId { get; set; }
