@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookStore_API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class migrationDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,7 @@ namespace BookStore_API.Data.Migrations
                     BookName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isActive = table.Column<bool>(type: "bit", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
                     CurrentQty = table.Column<int>(type: "int", nullable: true),
                     TotalQty = table.Column<int>(type: "int", nullable: true)
                 },
@@ -37,7 +37,7 @@ namespace BookStore_API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,7 +58,7 @@ namespace BookStore_API.Data.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isActive = table.Column<bool>(type: "bit", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -103,12 +103,12 @@ namespace BookStore_API.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "Author", "BookName", "CurrentQty", "Genre", "TotalQty", "isActive" },
+                columns: new[] { "Id", "Author", "BookName", "CurrentQty", "Genre", "IsActive", "TotalQty" },
                 values: new object[,]
                 {
-                    { 1, "Harper Lee", "To Kill a Mockingbird", 1, "Drama", 1, null },
-                    { 2, "George Orwell", "1984", 1, "Drama", 1, null },
-                    { 3, "Jane Austen", "Pride and Prejudice", 1, "Drama", 1, null }
+                    { 1, "Harper Lee", "To Kill a Mockingbird", 1, "Drama", true, 1 },
+                    { 2, "George Orwell", "1984", 1, "Drama", true, 1 },
+                    { 3, "Jane Austen", "Pride and Prejudice", 1, "Drama", true, 1 }
                 });
 
             migrationBuilder.InsertData(

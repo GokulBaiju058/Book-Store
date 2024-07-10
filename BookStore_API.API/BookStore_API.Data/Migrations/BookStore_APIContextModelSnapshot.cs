@@ -42,11 +42,11 @@ namespace BookStore_API.Data.Migrations
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("TotalQty")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("isActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -60,6 +60,7 @@ namespace BookStore_API.Data.Migrations
                             BookName = "To Kill a Mockingbird",
                             CurrentQty = 1,
                             Genre = "Drama",
+                            IsActive = true,
                             TotalQty = 1
                         },
                         new
@@ -69,6 +70,7 @@ namespace BookStore_API.Data.Migrations
                             BookName = "1984",
                             CurrentQty = 1,
                             Genre = "Drama",
+                            IsActive = true,
                             TotalQty = 1
                         },
                         new
@@ -78,6 +80,7 @@ namespace BookStore_API.Data.Migrations
                             BookName = "Pride and Prejudice",
                             CurrentQty = 1,
                             Genre = "Drama",
+                            IsActive = true,
                             TotalQty = 1
                         });
                 });
@@ -123,6 +126,7 @@ namespace BookStore_API.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -159,6 +163,9 @@ namespace BookStore_API.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -176,9 +183,6 @@ namespace BookStore_API.Data.Migrations
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("isActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

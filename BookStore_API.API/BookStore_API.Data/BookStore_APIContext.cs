@@ -56,6 +56,7 @@ namespace BookStore_API.Data
                     BookName = "To Kill a Mockingbird",
                     Author = "Harper Lee",
                     Genre ="Drama",
+                    IsActive = true,
                     CurrentQty = 1,
                     TotalQty = 1,
                 },
@@ -65,6 +66,7 @@ namespace BookStore_API.Data
                     BookName = "1984",
                     Author = "George Orwell",
                     Genre = "Drama",
+                    IsActive = true,
                     CurrentQty = 1,
                     TotalQty = 1,
                 },
@@ -74,6 +76,7 @@ namespace BookStore_API.Data
                     BookName = "Pride and Prejudice",
                     Author = "Jane Austen",
                     Genre = "Drama",
+                    IsActive= true,
                     CurrentQty = 1,
                     TotalQty = 1,
                 }

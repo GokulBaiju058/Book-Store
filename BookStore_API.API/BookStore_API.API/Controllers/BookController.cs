@@ -1,12 +1,10 @@
 ﻿using BookStore_API.API.Extensions;
 using BookStore_API.Business.Abstractions;
-using BookStore_API.Data.Entity;
 using BookStore_API.Data;
+using BookStore_API.Data.Entity;
 using BookStore_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace BookStore_API.API.Controllers
 {
@@ -59,10 +57,10 @@ namespace BookStore_API.API.Controllers
         {
             _logger.LogWarning("Getting User Details");
             var userRole = HttpContext.User.GetRoles();
-            // Check if userRole contains "LibraryAdmin"
-            if (!userRole.Contains("LibraryAdmin"))
+            // Check if User"
+            if (userRole.Contains("User"))
             {
-                isActive = null; // Set isActive to true
+                isActive = true; // Set isActive to true to enable only isActive boos to visible to users
             }
             _logger.LogInformation("BookController - GetAll Books");
             return _bookService.GetAll(pageNumber, pageSize,isActive, orderBy, orderDirection, search);

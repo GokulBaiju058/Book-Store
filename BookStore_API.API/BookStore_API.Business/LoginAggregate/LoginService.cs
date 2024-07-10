@@ -1,5 +1,6 @@
 ﻿using BookStore_API.Business.Abstractions;
 using BookStore_API.Business.Extensions;
+using BookStore_API.Business.Services.PasswordHasher;
 using BookStore_API.Models;
 using BookStore_API.Repositories.Abstractions;
 using Microsoft.Extensions.Configuration;
@@ -51,7 +52,18 @@ namespace BookStore_API.Business.LoginAggregate
                     Message = "Invalid password."
                 };
             }
-
+            // Check Password matches 
+            var isPasswordValid = PasswordHasher.Verify(loginDto.Password!, user.Password!);
+            if (!isPasswordValid)
+            {
+                return new ResponseMessage<LoggedUser>
+                {
+                    Data = null,
+                    Success = false,
+                    StatusCode = 404,
+                    Message = "Invalid password."
+                };
+            }
             // Create claims for the JWT token
             var claims = new List<Claim>()
             {

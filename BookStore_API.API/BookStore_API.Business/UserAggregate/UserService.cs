@@ -1,10 +1,10 @@
 ﻿using BookStore_API.Business.Abstractions;
 using BookStore_API.Business.Extensions;
+using BookStore_API.Business.Services.PasswordHasher;
 using BookStore_API.Data.Entity;
 using BookStore_API.Models;
-using BookStore_API.Business.Services.PasswordHasher;
-using Mapster;
 using BookStore_API.Repositories.Abstractions;
+using Mapster;
 
 namespace BookStore_API.Business.UserAggregate
 {

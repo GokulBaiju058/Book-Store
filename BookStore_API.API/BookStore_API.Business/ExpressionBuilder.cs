@@ -9,15 +9,15 @@ namespace IS_Toyo_MicroLearning_API.Business
         public static Expression<Func<T, bool>> GetExpression<T>(string propertyName, string search)
         {
             if (string.IsNullOrEmpty(search))
-                return null;
+                return null!;
 
             if (string.IsNullOrEmpty(propertyName))
-                return null;
+                return null!;
 
             var property = typeof(T).GetProperty(propertyName);
             var parent = Expression.Parameter(typeof(T));
-            MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(String) });
-            var expressionBody = Expression.Call(Expression.Property(parent, property), method, Expression.Constant(search));
+            MethodInfo method = typeof(string)!.GetMethod("Contains", new Type[] { typeof(String) })!;
+            var expressionBody = Expression.Call(Expression.Property(parent, property!), method, Expression.Constant(search));
             return Expression.Lambda<Func<T, bool>>(expressionBody, parent);
         }
     }
@@ -30,7 +30,7 @@ namespace IS_Toyo_MicroLearning_API.Business
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
         {
             if (expr1 == null || expr2 == null)
-                return null;
+                return null!;
 
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>
@@ -41,7 +41,7 @@ namespace IS_Toyo_MicroLearning_API.Business
         {
 
             if (expr1 == null || expr2 == null)
-                return null;
+                return null!;
 
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>
