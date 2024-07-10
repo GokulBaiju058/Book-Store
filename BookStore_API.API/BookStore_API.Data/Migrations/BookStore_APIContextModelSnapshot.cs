@@ -31,16 +31,16 @@ namespace BookStore_API.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BookName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("CurrentQty")
                         .HasColumnType("int");
 
                     b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -49,6 +49,12 @@ namespace BookStore_API.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Author");
+
+                    b.HasIndex("BookName");
+
+                    b.HasIndex("Genre");
 
                     b.ToTable("Books");
 
@@ -68,10 +74,10 @@ namespace BookStore_API.Data.Migrations
                             Id = 2,
                             Author = "George Orwell",
                             BookName = "1984",
-                            CurrentQty = 1,
+                            CurrentQty = 2,
                             Genre = "Drama",
                             IsActive = true,
-                            TotalQty = 1
+                            TotalQty = 2
                         },
                         new
                         {
