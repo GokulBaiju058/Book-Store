@@ -19,9 +19,9 @@ namespace BookStore_API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookName = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Author = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Genre = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true),
                     CurrentQty = table.Column<int>(type: "int", nullable: true),
                     TotalQty = table.Column<int>(type: "int", nullable: true)
@@ -107,7 +107,7 @@ namespace BookStore_API.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Harper Lee", "To Kill a Mockingbird", 1, "Drama", true, 1 },
-                    { 2, "George Orwell", "1984", 1, "Drama", true, 1 },
+                    { 2, "George Orwell", "1984", 2, "Drama", true, 2 },
                     { 3, "Jane Austen", "Pride and Prejudice", 1, "Drama", true, 1 }
                 });
 
@@ -119,6 +119,21 @@ namespace BookStore_API.Data.Migrations
                     { 1, "User" },
                     { 2, "LibraryAdmin" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_Author",
+                table: "Books",
+                column: "Author");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_BookName",
+                table: "Books",
+                column: "BookName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_Genre",
+                table: "Books",
+                column: "Genre");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BorrowedBooks_BookId",

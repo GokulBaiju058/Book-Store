@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookStore_API.Repositories")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84af7a2ec34221cea1c8bb4f65e13526194a3bfe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b5a7bb58e17ba4e20cbdacd3b49bbdffb515336")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookStore_API.Repositories")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookStore_API.Repositories")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

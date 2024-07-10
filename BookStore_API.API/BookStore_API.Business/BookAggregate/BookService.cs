@@ -52,7 +52,13 @@ namespace BookStore_API.Business.BookAggregate
         /// </summary>
         public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive, string orderBy, bool orderDirection, string search)
         {
-            Expression<Func<Book, bool>> expression = PredicateBuilder.Or(ExpressionBuilder.GetExpression<Book>("BookName", search), ExpressionBuilder.GetExpression<Book>("Author", search));
+            var expression = PredicateBuilder.Or(
+                 PredicateBuilder.Or(
+                     ExpressionBuilder.GetExpression<Book>("BookName", search),
+                     ExpressionBuilder.GetExpression<Book>("Author", search)
+                 ),
+                 ExpressionBuilder.GetExpression<Book>("Genre", search)
+             );
             var predicate = PredicateBuilder.True<Book>();
 
             // Add isActive filter if isActive is not null
@@ -198,7 +204,7 @@ namespace BookStore_API.Business.BookAggregate
         /// </summary>
         public ResponseMessage<List<BorrowedBookViewDto>> GetAllBorrowedBookByUser(int userId)
         {
-            var borrowedBooks = _borrowedBookRepository.Get(x => x.UserId == userId, includes: g => g.Book).ToList();
+            var borrowedBooks = _borrowedBookRepository.Get(x => x.UserId == userId && x.ReturnedDate == null, includes: g => g.Book).ToList();
             if (borrowedBooks.Count == 0)
             {
                 return new ResponseMessage<List<BorrowedBookViewDto>>() { Data = null, Success = false, Message = "No Data found" };

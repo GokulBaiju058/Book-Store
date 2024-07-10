@@ -35,6 +35,16 @@ namespace BookStore_API.Data
                 .HasForeignKey(bb => bb.BookId)
                 .OnDelete(DeleteBehavior.Restrict); // Or DeleteBehavior.Cascade if you want to cascade delete
 
+            // Indexes
+            modelBuilder.Entity<Book>()
+                .HasIndex(b => b.BookName);
+
+            modelBuilder.Entity<Book>()
+                .HasIndex(b => b.Author);
+
+            modelBuilder.Entity<Book>()
+                .HasIndex(b => b.Genre);
+
             //Seed Initial Data
             modelBuilder.Entity<Role>().HasData(
                 new Role
@@ -67,8 +77,8 @@ namespace BookStore_API.Data
                     Author = "George Orwell",
                     Genre = "Drama",
                     IsActive = true,
-                    CurrentQty = 1,
-                    TotalQty = 1,
+                    CurrentQty = 2,
+                    TotalQty = 2,
                 },
                 new Book
                 {
