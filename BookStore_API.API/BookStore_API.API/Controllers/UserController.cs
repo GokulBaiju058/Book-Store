@@ -34,7 +34,6 @@ namespace BookStore_API.API.Controllers
         /// <summary>
         /// Endpoint for retrieving user details by user ID.
         /// </summary>
-        /// <param name="userId">The ID of the user to retrieve.</param>
         /// <returns>Response containing the user's information.</returns>
         [HttpGet]
         [Route("GetUserById")]
