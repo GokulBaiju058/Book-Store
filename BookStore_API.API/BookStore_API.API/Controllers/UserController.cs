@@ -9,7 +9,7 @@ namespace BookStore_API.API.Controllers
     /// <summary>
     /// Controller responsible for handling user-specific operations.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     [Authorize(Roles = "User")] // Requires authorization with 'User' role for all actions in this controller
     public class UserController : ControllerBase
@@ -36,7 +36,6 @@ namespace BookStore_API.API.Controllers
         /// </summary>
         /// <returns>Response containing the user's information.</returns>
         [HttpGet]
-        [Route("GetUserById")]
         public async Task<ResponseMessage<UserDto>> GetById()
         {
             _logger.LogWarning("Getting User Details");
@@ -51,7 +50,6 @@ namespace BookStore_API.API.Controllers
         /// <param name="userDto">DTO containing updated user information.</param>
         /// <returns>Response containing the updated user's information.</returns>
         [HttpPut]
-        [Route("UpdateUser")]
         public async Task<ResponseMessage<UserDto>> Update(RegisterUserDto userDto)
         {
             _logger.LogInformation("UserController - Update User."); // Log user update attempt
@@ -63,7 +61,7 @@ namespace BookStore_API.API.Controllers
         /// </summary>
         /// <returns>Response containing a list of borrowed books by the current user.</returns>
         [HttpPost]
-        [Route("GetMyBorrowedBooks")]
+        [Route("borrowed-books")]
         public ResponseMessage<List<BorrowedBookViewDto>> GetMyBorrowedBooks()
         {
             _logger.LogInformation("UserController - Get books Borrowed By the Current User.");

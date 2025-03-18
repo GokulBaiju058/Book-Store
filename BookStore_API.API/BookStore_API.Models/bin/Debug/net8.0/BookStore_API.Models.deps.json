@@ -1060,7 +1060,10 @@
           "Serilog.Sinks.MSSqlServer": "6.6.1"
         },
         "runtime": {
-          "BookStore_API.Data.dll": {}
+          "BookStore_API.Data.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

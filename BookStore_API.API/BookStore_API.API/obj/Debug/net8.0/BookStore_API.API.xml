@@ -14,45 +14,41 @@
             Constructor
             </summary>
         </member>
-        <member name="M:BookStore_API.API.Controllers.AdminController.AddBook(BookStore_API.Models.BookDto)">
+        <member name="M:BookStore_API.API.Controllers.AdminController.GetBookDetails(System.Int32)">
             <summary>
-            Adds a new book.
+            Gets detailed information about a specific book
             </summary>
-            <param name="book">The book details to add.</param>
+            <param name="bookId">ID of the book</param>
         </member>
-        <member name="M:BookStore_API.API.Controllers.AdminController.UpdateBook(BookStore_API.Models.BookDto)">
+        <member name="M:BookStore_API.API.Controllers.AdminController.CreateBook(BookStore_API.Models.BookDto)">
             <summary>
-            Updates an existing book.
+            Creates a new book
             </summary>
-            <param name="book">The updated book details.</param>
+            <param name="bookDto">Book information</param>
+        </member>
+        <member name="M:BookStore_API.API.Controllers.AdminController.UpdateBook(System.Int32,BookStore_API.Models.BookDto)">
+            <summary>
+            Updates an existing book
+            </summary>
+            <param name="bookId">ID of the book to update</param>
+            <param name="bookDto">Updated book information</param>
         </member>
         <member name="M:BookStore_API.API.Controllers.AdminController.DeleteBook(System.Int32)">
             <summary>
-            Deletes a book by its Id.
+            Deletes a book
             </summary>
-            <param name="bookId">The Id of the book to delete.</param>
+            <param name="bookId">ID of the book to delete</param>
         </member>
-        <member name="M:BookStore_API.API.Controllers.AdminController.GetAllBorrowedBookByUser(System.Int32)">
+        <member name="M:BookStore_API.API.Controllers.AdminController.GetUserBorrowedBooks(System.Int32)">
             <summary>
-            Retrieves all books borrowed by a specific user.
+            Gets all books borrowed by a specific user
             </summary>
-            <param name="userId">The Id of the user.</param>
+            <param name="userId">ID of the user</param>
         </member>
         <member name="M:BookStore_API.API.Controllers.AdminController.GetAllBorrowedBooks(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Boolean,System.String)">
             <summary>
-            Retrieves a paged list of all borrowed books.
+            Gets a paged list of all borrowed books
             </summary>
-            <param name="pageNumber">Page number.</param>
-            <param name="pageSize">Number of items per page.</param>
-            <param name="orderBy">Field to order by.</param>
-            <param name="orderDirection">Order direction (ascending or descending).</param>
-            <param name="search">Search criteria.</param>
-        </member>
-        <member name="M:BookStore_API.API.Controllers.AdminController.GetBookDetail(System.Int32)">
-            <summary>
-            Retrieves detailed information about a specific book.
-            </summary>
-            <param name="bookId">The Id of the book.</param>
         </member>
         <member name="T:BookStore_API.API.Controllers.BookController">
             <summary>
@@ -66,28 +62,32 @@
             <param name="logger">Logger instance for logging information related to book operations.</param>
             <param name="bookService">Service interface providing methods for book management.</param>
         </member>
-        <member name="M:BookStore_API.API.Controllers.BookController.GetbookById(System.Int32)">
+        <member name="M:BookStore_API.API.Controllers.BookController.GetBook(System.Int32)">
             <summary>
-            Retrieves details of a book by its Id.
+            Retrieves a specific book by its identifier.
             </summary>
-            <param name="bookId">The Id of the book.</param>
+            <param name="bookId">The unique identifier of the book.</param>
+            <returns>The book details.</returns>
         </member>
-        <member name="M:BookStore_API.API.Controllers.BookController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,System.Boolean,System.String)">
+        <member name="M:BookStore_API.API.Controllers.BookController.GetBooks(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,System.Boolean,System.String,BookStore_API.Data.Enum.SearchTypeEnum)">
             <summary>
-            Retrieves a paged list of all books.
+            Retrieves a collection of books with optional filtering and pagination.
             </summary>
-            <param name="pageNumber">Page number.</param>
+            <param name="pageNumber">Page number for pagination.</param>
             <param name="pageSize">Number of items per page.</param>
+            <param name="isActive">Filter by active status.</param>
             <param name="orderBy">Field to order by.</param>
-            <param name="orderDirection">Order direction (ascending or descending).</param>
+            <param name="orderDirection">Order direction (true for ascending, false for descending).</param>
             <param name="search">Search criteria.</param>
-            <param name="isActive">Filter By isActive.</param>
+            <param name="searchType">Determines the search strategy to use. Standard searches across multiple fields, while Inventory provides status-based filtering.</param>
+            <returns>A paged list of books that match the specified criteria wrapped in a response message.</returns>
         </member>
         <member name="M:BookStore_API.API.Controllers.BookController.BorrowBook(System.Int32)">
             <summary>
-            Borrows a book for the authenticated user.
+            Creates a book loan for the authenticated user.
             </summary>
-            <param name="bookId">The Id of the book to borrow.</param>
+            <param name="bookId">The identifier of the book to borrow.</param>
+            <returns>The created loan record.</returns>
         </member>
         <member name="M:BookStore_API.API.Controllers.BookController.ReturnBook(System.Int32)">
             <summary>

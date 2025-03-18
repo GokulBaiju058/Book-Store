@@ -14,7 +14,7 @@ namespace BookStore_API.Data.Entity
 
         public string? LastName { get; set; }
 
-        public string? Phone { get; set; }
+        public int? Phone { get; set; }
 
         public int Age { get; set; }
 

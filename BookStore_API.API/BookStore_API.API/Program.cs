@@ -1,8 +1,10 @@
 using BookStore_API.API.Middleware;
 using BookStore_API.Business.Abstractions;
 using BookStore_API.Business.BookAggregate;
+using BookStore_API.Business.Factories;
 using BookStore_API.Business.LoginAggregate;
 using BookStore_API.Business.Mapper;
+using BookStore_API.Business.Strategies.BookSearchStrategy;
 using BookStore_API.Business.UserAggregate;
 using BookStore_API.Data;
 using BookStore_API.Repositories;
@@ -40,6 +42,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBorrowedBookRepository, BorrowedBookRepository>();
+builder.Services.AddScoped<StandardSearchStrategy>();
+builder.Services.AddScoped<InventorySearchStrategy>();
+builder.Services.AddScoped<BookSearchStrategyFactory>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.

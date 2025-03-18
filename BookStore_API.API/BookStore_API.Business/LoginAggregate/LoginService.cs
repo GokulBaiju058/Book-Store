@@ -40,6 +40,7 @@ namespace BookStore_API.Business.LoginAggregate
             new ValidatorExtensions.GenericValidation<LoginDto, LoginValidator>().Validate(loginDto);
 
             // Retrieve user from repository including related role information
+            var users =_userRepository.GetAll();
             var user =  _userRepository.Get(x => x.Username == loginDto.Username, includes: x => x.Role).FirstOrDefault();
 
             if (user == null)

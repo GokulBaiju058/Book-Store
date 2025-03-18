@@ -1,13 +1,14 @@
 ﻿using BookStore_API.Business.Abstractions;
 using BookStore_API.Business.Extensions;
+using BookStore_API.Business.Factories;
 using BookStore_API.Data;
 using BookStore_API.Data.Entity;
+using BookStore_API.Data.Enum;
 using BookStore_API.Models;
 using BookStore_API.Repositories.Abstractions;
 using IS_Toyo_MicroLearning_API.Business;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace BookStore_API.Business.BookAggregate
 {
@@ -18,12 +19,15 @@ namespace BookStore_API.Business.BookAggregate
     {
         private readonly IBookRepository _bookRepository;
         private readonly IBorrowedBookRepository _borrowedBookRepository;
+        private readonly BookSearchStrategyFactory _searchStrategyFactory;
 
-        public BookService(IBookRepository bookRepository, IBorrowedBookRepository borrowedBookRepository)
+        public BookService(IBookRepository bookRepository, IBorrowedBookRepository borrowedBookRepository, BookSearchStrategyFactory searchStrategyFactory)
         {
-            _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
-            _borrowedBookRepository = borrowedBookRepository ?? throw new ArgumentNullException(nameof(borrowedBookRepository));
+            _bookRepository = bookRepository;
+            _borrowedBookRepository = borrowedBookRepository;
+            _searchStrategyFactory = searchStrategyFactory;
         }
+
 
         /// <summary>
         /// Retrieves a book by its ID.
@@ -50,18 +54,13 @@ namespace BookStore_API.Business.BookAggregate
         /// <summary>
         /// Retrieves a list of books based on optional filtering and paging parameters.
         /// </summary>
-        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive, string orderBy, bool orderDirection, string search)
+        public ResponseMessage<PagedList<BookViewDto>> GetAll(int? pageNumber, int? pageSize,bool? isActive, string orderBy, 
+            bool orderDirection, string search, SearchTypeEnum searchType = SearchTypeEnum.Standard)
         {
-            var expression = PredicateBuilder.Or(
-                 PredicateBuilder.Or(
-                     ExpressionBuilder.GetExpression<Book>("BookName", search),
-                     ExpressionBuilder.GetExpression<Book>("Author", search)
-                 ),
-                 ExpressionBuilder.GetExpression<Book>("Genre", search)
-             );
-            var predicate = PredicateBuilder.True<Book>();
+            var searchStrategy = _searchStrategyFactory.GetStrategy(searchType);
+            var expression = searchStrategy.BuildSearchExpression(search);
 
-            // Add isActive filter if isActive is not null
+            var predicate = PredicateBuilder.True<Book>();
             if (isActive.HasValue)
             {
                 predicate = predicate.And(p => p.IsActive == isActive);

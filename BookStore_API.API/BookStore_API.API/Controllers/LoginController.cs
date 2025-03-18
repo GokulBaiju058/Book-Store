@@ -7,7 +7,7 @@ namespace BookStore_API.API.Controllers
     /// <summary>
     /// Controller responsible for handling user login and registration operations.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -33,11 +33,11 @@ namespace BookStore_API.API.Controllers
         /// </summary>
         /// <param name="loginDto">DTO containing user credentials.</param>
         /// <returns>Response containing a logged-in user's information.</returns>
-        [HttpPost]
+        [HttpPost("login")]
         public ResponseMessage<LoggedUser> Login(LoginDto loginDto)
         {
-            _logger.LogInformation("LoginController - Authenticate User."); // Log authentication attempt
-            return _loginService.AuthenticateUser(loginDto); // Delegate authentication to service
+            _logger.LogInformation("LoginController - Authenticate User.");
+            return _loginService.AuthenticateUser(loginDto);
         }
 
         /// <summary>
@@ -45,8 +45,7 @@ namespace BookStore_API.API.Controllers
         /// </summary>
         /// <param name="registerUserDto">DTO containing user details for registration.</param>
         /// <returns>Response containing the newly registered user's information.</returns>
-        [HttpPost]
-        [Route("Register")]
+        [HttpPost("register")]
         public async Task<ResponseMessage<UserDto>> Add(RegisterUserDto registerUserDto)
         {
             _logger.LogInformation("LoginController - Register New User."); // Log user registration attempt
